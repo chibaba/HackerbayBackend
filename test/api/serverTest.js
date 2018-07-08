@@ -1,8 +1,8 @@
 const chaiHttp = require('chai-http');
 const chai = require ('chai');
-const request = 'request';
+const request = require('request');
 const supertest = require('supertest');
-const index = require('../../');
+const server = require('../../');
 
 const should = chai.should();
 chai.use(chaiHttp);

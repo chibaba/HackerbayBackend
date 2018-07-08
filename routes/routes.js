@@ -100,11 +100,13 @@ module.exports = (app, passport) => {
     });
   });
 
-  app.post('/login', passport.authenticate('local'), (req, res) => {
+  app.post('/login', passport.authenticate('local', {
+    session: true
+  }), (req, res) => {
     res.redirect('/')
   });
   app.get('/profile', passport.authenticate('local', {
-    session: false
+    session: true
   }), (req, res) => {
     res.json({
       user: user.req

@@ -5,6 +5,6 @@ module.exports = {
     host: "localhost",
     dialect: "postgres",
     secret: "newpassword",
-    operatorsAliases: Op
+    operatorsAliases: false
   })
 } 
