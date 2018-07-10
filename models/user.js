@@ -7,8 +7,16 @@ const Strategy = require('passport-local')
   const sequelize = new Sequelize("palandas", "postgres", "newpassword", {
     host: "localhost",
    dialect: "postgres",
-   operatorsAliases: false
- })
+   operatorsAliases: false,
+   pool: {
+    max: 5,
+    min: 0,
+    acquire: 30000,
+    idle: 10000
+  }
+  
+})
+sequelize.sync({force: false});
 const User = sequelize.define(
   'User',
   {
@@ -31,7 +39,15 @@ const User = sequelize.define(
         User.password = bcrypt.hashSync(User.password, 10);
       }
     }
-  }
+  },
+  // user.sync({force: true}).then(() => {
+  //   // Table created
+  //   return User.create({
+  //     email: 'John',
+  //     password: 'Hancock'
+  //   });
+  // })
+  
 );
 
 
@@ -54,7 +70,7 @@ module.exports.getUserById = (id, cb) => {
   User.findById(id, cb);
 }
 module.exports.getUserByEmail = (email, cb) => {
-  User.findOne({email:email}, cb);
+  User.findAndCreate({email:email}, cb);
 }
 module.exports.createUser = (newUser, cb) => {
   bcrypt.genSalt(10, (err, salt)=>{
