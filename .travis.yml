@@ -3,5 +3,3 @@ node_js:
 - "stable"
 services:
   -postgresql
-  before script:
-    - postgresql -c 'create database palandas;' -u postgres
