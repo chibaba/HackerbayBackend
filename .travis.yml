@@ -4,4 +4,4 @@ node_js:
 services:
   -psql
   before_install:
-  - psql -e 'CREATE DATABASE palandas;'
+  - psql -u root -e 'CREATE DATABASE palandas;'
