@@ -4,4 +4,4 @@ node_js:
 services:
   -postgresql
   before script:
-    - psql -c 'create database palandas;' -u postgres
+    - postgresql -c 'create database palandas;' -u postgres
