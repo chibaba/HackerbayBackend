@@ -3,5 +3,7 @@ node_js:
 - "stable"
 services: 
   - postgresql
+
+  script: npm test
  
   
