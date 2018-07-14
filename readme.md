@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/chibaba/HackerbayBackend.svg?branch=master)](https://travis-ci.org/chibaba/HackerbayBackend)
+[![Build Status](https://travis-ci.org/chibaba/HackerbayBackend.svg?branch=master)](https://travis-ci.org/chibaba/HackerbayBackend
 
 
 # This is the beginning of my project at `Hackerbay-University`
