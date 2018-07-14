@@ -17,7 +17,6 @@ const Strategy = require('passport-local')
   }
   
 })
-sequelize.sync({force: false});
 const User = sequelize.define(
   'User',
   {
@@ -27,11 +26,11 @@ const User = sequelize.define(
       defaultValue: Sequelize.UUIDV4
     },
     email:  {
-          type: Sequelize.STRING,
-          isUnique: true,
-          allowNull: false,
-          isEmail: true
-         },
+      type: Sequelize.STRING,
+      isUnique: true,
+      allowNull: false,
+      isEmail: true
+    },
     password: Sequelize.STRING
   },
   {
@@ -41,17 +40,17 @@ const User = sequelize.define(
       }
     }
   },
-  // user.sync({force: true}).then(() => {
-  //   // Table created
-  //   return User.create({
-  //     email: 'John',
-  //     password: 'Hancock'
-  //   });
-  // })
-  
-);
 
-
+      
+    );
+    sequelize.sync({force: false}).then(() => {
+      User.build({
+        email: 'ocjonyeoka@gmail.com',
+        password: 'wat gat'
+      }).save();
+    });
+    
+    
 module.exports = User ;
 
 // module.exports = (passport, User) => {

@@ -161,11 +161,11 @@ module.exports = (app, passport) => {
           email,
           password
         }
-      }).spread((userResult, created) => {
-        if (created) {
+      }).spread((userResult, createUser) => {
+        if (createUser) {
           return res.status(200).json({
             success: true,
-            created
+            createUser
           });
         } else {
           return res.status(400).json({
