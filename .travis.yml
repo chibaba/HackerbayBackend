@@ -2,7 +2,7 @@ language: node_js
 node_js:
 - "stable"
 services: 
-  - postgres
+  - postgrespsql
  script:
   - npm test
   before_script:
