@@ -6,7 +6,7 @@ const Strategy = require('passport-local')
 //module.exports = (sequelize, DataTypes) => {
   const sequelize = new Sequelize("palandas", "postgres", "newpassword", {
     host: "localhost",
-   // port: 5000,
+    //port: 5432,
    dialect: "postgres",
    operatorsAliases: false,
    pool: {

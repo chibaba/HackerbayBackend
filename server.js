@@ -9,7 +9,7 @@ const passport = require('passport')
 
 const LocalStrategy = require('passport-local').Strategy;
 const config = require('./config/database');
-const port = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;
 
 require('./config/passport')(passport);
 
@@ -21,6 +21,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 require('./routes/routes')(app, passport);
-app.listen(port, () => {
-  console.log('Server is listening on port : ' +port);
-})
+const server = app.listen(PORT, () => {
+  console.log(`Server listening at http://localhost:${PORT}`);
+});
