@@ -1,5 +1,5 @@
 const passport = require('passport');
-//const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 const config = require('../config/database');
 const User = require('../models/user');
 const express = require('express');
@@ -163,7 +163,7 @@ module.exports = (app, passport) => {
         }
       }).spread((userResult, createUser) => {
         if (createUser) {
-          return res.status(200).json({
+          return res.status(200).json({ token: jwt.sign({ id: User.id}, 'newpassword  '),
             success: true,
             createUser
           });
@@ -191,10 +191,8 @@ module.exports = (app, passport) => {
         if (err) {
           return res.send(err);
         }
-        const token = jwt.sign(user, "newpassword");
-        return res.json({
+        return res.json({ token: jwt.sign({ id: User.id }, 'newpassword'),
           success: true,
-               token: token,
                user: {
                 id: user._id,
                 email: user.email,
@@ -203,6 +201,18 @@ module.exports = (app, passport) => {
       });
     })(req, res);
   });
+
+  app.use((req, res, next) => {
+    if (req.tokenPayload) {
+      req.user = req.tokenPayload.id;
+    }
+    if (req.user) {
+      return next();
+    } else {
+      return res.status(401).json({ status: 'error', code: 'unauthorized' });
+    }
+  });
+
 
   // app.post('/User/login', passport.authenticate('local', {
   //   session: false
