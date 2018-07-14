@@ -4,6 +4,5 @@ node_js:
 services: 
   - postgresql
 
-  script: npm test
  
   
