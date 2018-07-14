@@ -3,7 +3,7 @@ node_js:
 - "stable"
 services: 
   - postgrespsql
- script:
-  - npm test
-  before_script:
+before_script:
   - psql -c 'create database palandas;' -U postgres
+script:
+  - npm test
