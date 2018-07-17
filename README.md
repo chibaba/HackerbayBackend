@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/chibaba/HackerbayBackend/.svg?branch=task3)]
+[![Build Status](https://travis-ci.org/chibaba/HackerbayBackend.svg?branch=task3)]
 (https://travis-ci.org/chibaba/HackerbayBackend)
 
 
