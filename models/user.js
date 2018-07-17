@@ -3,7 +3,6 @@ const bcrypt = require('bcrypt');
 const Sequelize = require('sequelize');
 const Strategy = require('passport-local')
 
-//module.exports = (sequelize, DataTypes) => {
   const sequelize = new Sequelize("palandas", "postgres", "newpassword", {
     host: "localhost",
     //port: 5432,
@@ -50,32 +49,13 @@ const User = sequelize.define(
       }).save();
     });
     
-      // login: (req, res) => {
-      //   const { user } = req;
-      //   res.status(200).json({ token: jwt.sign({ id: user.id }, secret) });
-      // },
-      // register: (req, res) => {
-      //   const { user } = req;
-      //   res.status(200).json({ token: jwt.sign({ id: user.id }, secret) });
-      //   res.json(user);
-      // }
+    
     
     
     
 module.exports = User ;
 
-// module.exports = (passport, User) => {
-//   passport.use(
-//     'local',
-//     new Strategy(
-//       {
-//         usernameField: 'email',
-//         passwordField: 'password',
-//         passReqToCallback: true,
-//       },
-//     )
-//   )
-// }
+
 
 module.exports.getUserById = (id, cb) => {
   User.findById(id, cb);
