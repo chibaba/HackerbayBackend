@@ -4,6 +4,8 @@
 [![Coverage status](https://coveralls.io/chibaba/HackerbayBackend.svg?branch=task3)]
 (https://coveralls.io/chibaba/HackerbayBackend)
 
+[![codecov](https://codecov.io/gh/chibaba/HackerbayBackend/branch/task3/graph/badge.svg)](https://codecov.io/gh/chibaba/HackerbayBackend)
+
 
 ## This is the beginning of my project at `Hackerbay-University`
 _This essentially involves a simple nodejs project that contains a `GET` and `POST` API_
