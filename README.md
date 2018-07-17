@@ -1,8 +1,8 @@
 [![Build Status](https://travis-ci.org/chibaba/HackerbayBackend.svg?branch=task3)]
 (https://travis-ci.org/chibaba/HackerbayBackend)
 
-[![Coverage status](https://coveralls.io/chibaba/HackerbayBackend/badge.svg?branch=task3)]
-(https://codecov.io/chibaba/HackerbayBackend)
+[![Coverage status](https://coveralls.io/chibaba/HackerbayBackend.svg?branch=task3)]
+(https://coveralls.io/chibaba/HackerbayBackend)
 
 
 ## This is the beginning of my project at `Hackerbay-University`
