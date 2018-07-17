@@ -7,3 +7,4 @@ before_script:
   - psql -c 'create database palandas;' -U postgres
 script:
   - npm test
+  after_success: 'npm run coveralls'

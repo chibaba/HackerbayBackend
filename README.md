@@ -1,7 +1,7 @@
-[![Build Status](https://travis-ci.org/chibaba/HackerbayBackend.svg?branch=master)]
+[![Build Status](https://travis-ci.org/chibaba/HackerbayBackend.svg?branch=task3)]
 (https://travis-ci.org/chibaba/HackerbayBackend)
 
-[![codecov](https://codecov.io/gh/chibaba/HackerbayBackend.svg?branch=master)]
+[![Coverage status](https://coveralls.io/chibaba/HackerbayBackend/badge.svg?branch=task3)]
 (https://codecov.io/chibaba/HackerbayBackend)
 
 
