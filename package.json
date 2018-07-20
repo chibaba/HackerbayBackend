@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "test": "mocha test/**/*.js --timeout 10,000 --exit",
-    "coverage": "nyc mocha --require babel-core/register ./test/**/*.js --timeout=4000",
+    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && CODECOV_TOKEN=eb5f30f4-b8fa-4d49-862c-c2373013c16b codecov",
+    "coverage-dev": "nyc --require babel-core/register mocha ./test/**/*.spec.js --exit -w",
     "precommit": "pretty-quick --staged"
   },
   "keywords": [],
