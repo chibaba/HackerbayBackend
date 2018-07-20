@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "test": "mocha test/**/*.js --timeout 10,000 --exit",
-    "coverage": "nyc mocha --require babel-core/register ./test/**/*.js --timeout=4000"
+    "coverage": "nyc mocha --require babel-core/register ./test/**/*.js --timeout=4000",
+    "precommit": "pretty-quick --staged"
   },
   "keywords": [],
   "author": "",
