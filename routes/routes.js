@@ -215,22 +215,22 @@ passport.use(
   //   })(req, res);
   // });
 
-  app.use((req, res, next) => {
-    if (req.tokenPayload) {
-      req.user = req.tokenPayload.id;
-    }
-    if (req.User) {
-      return next();
-    } else {
-      return res.status(401).json({ status: 'error', code: 'unauthorized' });
-    }
-  });
+  // app.use((req, res, next) => {
+  //   if (req.tokenPayload) {
+  //     req.user = req.tokenPayload.id;
+  //   }
+  //   if (req.User) {
+  //     return next();
+  //   } else {
+  //     return res.status(401).json({ status: 'error', code: 'unauthorized' });
+  //   }
+  // });
 
 
  
 
-  app.get('/logout', (req, res) => {
-    req.logout();
-    res.redirect('/');
-  })
+  // app.get('/logout', (req, res) => {
+  //   req.logout();
+  //   res.redirect('/');
+  // })
 }
