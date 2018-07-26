@@ -23,6 +23,7 @@ describe('POST /signup', () => {
         res.body.should.be.a('object');
     
         res.body.should.have.property('token');
+        res.body.should.have.property('success');
         done();
       });
   });

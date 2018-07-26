@@ -95,40 +95,76 @@ passport.use(
   // )
 
 
-  app.post('/signup', function(req, res) {
-    var newUser = new User();
-      newUser.email= req.body.email;
-      newUser.password= req.body.password;
+  // app.post('/signup', function(req, res) {
+  //   var newUser = new User();
+  //     newUser.email= req.body.email;
+  //     newUser.password= req.body.password;
 
-      User.findOne({ email: req.body.email}, (err, existingUser) =>{
-        if(existingUser) {
-      return res.status(400).json({
-        message: (req.body.email + "User is currently existing")
-      })
-    } else {
-      User.save((err, newUser) => {
-       if (err) return next(err);
-       res.json("New User has been created")
-      })
-    }
-    })
+  //     User.findOne({ email: req.body.email}, (err, existingUser) =>{
+  //       if(existingUser) {
+  //     return res.status(400).json({
+  //       message: (req.body.email + "User is currently existing")
+  //     })
+  //   } else {
+  //     User.save((err, newUser) => {
+  //      if (err) return next(err);
+  //      res.json("New User has been created")
+  //     })
+  //   }
+  //   })
 
     
-    User.createUser(newUser, function(err, user){
-      if(errors) {
-        res.status(400).json({success: false, message: 'user is not registered '})
-       // if(err) throw err;
-        console.log(user)
-      }
-      });
-      //res.status(200).json({success:true, message: 'user is registered'});
-          res.status(200).json({ token: jwt.sign({ id: User.id}, 'newpassword  '),
-          success: true,
-          message: 'user created'
+  //   User.createUser(newUser, function(err, user){
+  //     if(errors) {
+  //       res.status(400).json({success: false, message: 'user is not registered '})
+  //      // if(err) throw err;
+  //       console.log(user)
+  //     }
+  //     });
+  //     //res.status(200).json({success:true, message: 'user is registered'});
+  //         res.status(200).json({ token: jwt.sign({ id: User.id}, 'newpassword  '),
+  //         success: true,
+  //         message: 'user created'
   
-  })  
+  // })  
         
-        })
+  //       })
+
+        app.post("/signup", (req, res) => {
+          const { email, password } = req.body;
+        
+          if (!email || !password) {
+            res.status(400).json({
+              success: false,
+              message: "Incorrect details"
+            });
+          }
+          if (email && password) {
+            User.findOrCreate({
+              where: {
+                email,
+                password
+              }
+            }).spread((userResult, created) => {
+              if (created) {
+                res.status(200).json({ token: jwt.sign({ id: User.id}, 'newpassword  '),
+                     success: true,
+                 message: 'user created'
+  
+               })
+                
+              } else {
+                return res.status(400).json({
+                  message: false,
+                  message: "User already exists"
+                });
+              }
+            })
+          }
+
+            });
+          
+        
 
 
 
