@@ -33,7 +33,7 @@ module.exports = (app, passport) => {
 //      function(email, password, done) {
     
 //     User.findOne({ email: req.body.email}, (err, existingUser) =>{
-//       .then(User => {
+       
 //           if(existingUser) {
 //         return res.status(400).json({
 //           message: (req.body.email + "User is currently existing")
@@ -43,16 +43,16 @@ module.exports = (app, passport) => {
 //          if (err) return next(err) 
 //            if(User) {
 //              res.status(200).json("New User has been created")
-//             })
-//           }
+//             }
+//           })
+//         }
 //         })
-//         return done(null, User, {message: 'Invalid Password'})
-//       }
-//       });
-//     }
+      
+//       }));
+    
 
-//   )
-// )
+  
+
 
       
 passport.use(
