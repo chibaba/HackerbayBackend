@@ -43,10 +43,15 @@ const User = sequelize.define(
       
     );
     sequelize.sync({force: false}).then(() => {
-      User.build({
-        email: 'ocjonyeoka@gmail.com',
-        password: 'wat gat'
-      }).save();
+      User.create({
+      
+        
+
+            email :'chibaba@gmail.com',
+            password : 'we are hwer'
+          
+        
+      });
     });
     
     
@@ -57,19 +62,21 @@ module.exports = User ;
 
 
 
+
 module.exports.getUserById = (id, cb) => {
   User.findById(id, cb);
 }
 module.exports.getUserByEmail = (email, cb) => {
-  User.findAndCreate({email:email}, cb);
+  User.findOne({email:email}, cb);
 }
 module.exports.createUser = (newUser, cb) => {
   bcrypt.genSalt(10, (err, salt)=>{
        bcrypt.hash(newUser.password, salt, (err, hash)=>{
+        // newUser.password = hash;
          
           if(err) {
             return err
-        }
+         }
         // newUser.password = hash;
          newUser.save(cb);
        })

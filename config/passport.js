@@ -9,9 +9,13 @@ module.exports= (passport) => {
   done(null, user.id);
 });
 passport.deserializeUser((id, done) =>{
-  User.getUserById(id, (err, user) => {
+  //User.getUserById(id, (err, user) => {
+    User.find({
+      where: {
+        email:email
+      }
+    })
     done(err, user);
   })
-})
-
 }
+

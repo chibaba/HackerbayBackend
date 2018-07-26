@@ -21,11 +21,13 @@ describe('POST /signup', () => {
       .end((err, res) => {
         res.should.have.status(200);
         res.body.should.be.a('object');
+    
         res.body.should.have.property('token');
         done();
       });
   });
 });
+
 
 describe('Login/SignUp Routes', () => {
   describe('POST /login', () => {
@@ -45,5 +47,22 @@ describe('Login/SignUp Routes', () => {
           done();
         });
     });
+    // it('it should return 400 when the user is not available ', done => {
+    //   const params = {
+    //     email: 'chinedua@gmail.com',
+    //     password: '12345',
+    //   };
+    //   chai
+    //     .request('http://localhost:5000')
+    //     .post('/login')
+    //     .send(params)
+    //     .end((err, res) => {
+    //       res.should.have.status(400);
+    //       done();
+    //     });
+    // });
   });
-});
+})
+
+
+
