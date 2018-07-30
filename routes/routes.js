@@ -31,8 +31,6 @@ app.use(passport.initialize())
 
 app.use(passport.session())
 
-setupPassport(app)
-
 app.post('/signup', signupController)
 
 app.post('/login', passport.authenticate('local'), function (req, res)  {
@@ -44,17 +42,9 @@ app.post('/login', passport.authenticate('local'), function (req, res)  {
     })
   }
   return res.status(401)
-  // .json({
-  //   message: 'Unauthorized Access',
-  // })
+  .json({
+    message: 'Unauthorized Access',
+  })
 })
 
 module.exports = app
-
-
-    
-
-
-
-  
- 
