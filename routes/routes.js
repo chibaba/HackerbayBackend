@@ -32,10 +32,10 @@ app.use(passport.session())
 
 setupPassport(app)
 
-app.get('/', (req, res) => {
-  console.log('Yay')
-  res.json('welcome to authenticating jwt')
-});
+// app.get('/', (req, res) => {
+//   console.log('Yay')
+//   res.json('welcome to authenticating jwt')
+// });
 
 app.post('/signup', signupController)
 
