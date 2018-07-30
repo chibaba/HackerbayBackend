@@ -1,13 +1,15 @@
+
+
+
+const Router = require('express').Router
 const passport = require('passport');
-const jwt = require('jsonwebtoken');
-const config = require('../config/database');
-const User = require('../models/user');
-const express = require('express');
-const app = require('express').Router
+const User = require('../model/User');
+const signUpController = require('../controllers/signupController')
+const cfg = require('../controllers/config')
+const setupPassport = require('../config/passport')
 
-const LocalStrategy = require('passport-local').Strategy;
 
-module.exports = (app, passport) => {
+const app = Router()
   // Task1 begins here
 
   app.get('/', (req, res) => {
@@ -25,248 +27,54 @@ module.exports = (app, passport) => {
   app.get('/data', (req, res) => {
    res.status(200).json({data:data});
   })
-// // Task 1 ends here
-
-// passport.use(
-//   new LocalStrategy(
-//     { usernameField: "email", passwordField: "password" },
-//      function(email, password, done) {
-    
-//     User.findOne({ email: req.body.email}, (err, existingUser) =>{
-       
-//           if(existingUser) {
-//         return res.status(400).json({
-//           message: (req.body.email + "User is currently existing")
-//         })
-//       } else {
-//         User.save((err, User) => {
-//          if (err) return next(err) 
-//            if(User) {
-//              res.status(200).json("New User has been created")
-//             }
-//           })
-//         }
-//         })
-      
-//       }));
-    
-
-  
-
-
-      
-passport.use(
-  new LocalStrategy(
-    { usernameField: "email", passwordField: "password" },
-    function(email, password, done) {
-      return User.findOne({ email, password })
-        .then(User => {
-          if (!User) {
-            return done(null, false, {
-              message: "Incorrect email or password"
-            });
-          } 
-          return done(null, User, { message: "Logged In Successfully" });
-        })
-        .catch(err => done(err));
-    }
-  )
-)
-
-  //   passport.use(
-  //   new LocalStrategy(
-  //     function(email, password, done) {
-  //       User.getUserByEmail(email, (err, User) =>{
-  //         if(err) throw err;
-  //         if(!user) {
-  //           return done(null, false, {message: 'Unknown user'})
-  //         }
-  //         User.comparePassword(password, User.password, (err, isMatch) => {
-  //           if(err) throw err;
-  //           if(isMatch){
-  //             return done(null, User)
-  //           } else {
-  //             return done(null, false, {message: 'Invalid Password'})
-  //           }
-  //         })
-  //       })
-  //     }
-  //   )
-  // )
-
-
-  // app.post('/signup', function(req, res) {
-  //   var newUser = new User();
-  //     newUser.email= req.body.email;
-  //     newUser.password= req.body.password;
-
-  //     User.findOne({ email: req.body.email}, (err, existingUser) =>{
-  //       if(existingUser) {
-  //     return res.status(400).json({
-  //       message: (req.body.email + "User is currently existing")
-  //     })
-  //   } else {
-  //     User.save((err, newUser) => {
-  //      if (err) return next(err);
-  //      res.json("New User has been created")
-  //     })
-  //   }
-  //   })
-
-    
-  //   User.createUser(newUser, function(err, user){
-  //     if(errors) {
-  //       res.status(400).json({success: false, message: 'user is not registered '})
-  //      // if(err) throw err;
-  //       console.log(user)
-  //     }
-  //     });
-  //     //res.status(200).json({success:true, message: 'user is registered'});
-  //         res.status(200).json({ token: jwt.sign({ id: User.id}, 'newpassword  '),
-  //         success: true,
-  //         message: 'user created'
-  
-  // })  
-        
-  //       })
-
-        app.post("/signup", (req, res) => {
-          const { email, password } = req.body;
-        
-          if (!email || !password) {
-            res.status(400).json({
-              success: false,
-              message: "Incorrect details"
-            });
-          }
-          if (email && password) {
-            User.findOrCreate({
-              where: {
-                email,
-                password
-              }
-            }).spread((userResult, created) => {
-              if (created) {
-                res.status(200).json({ token: jwt.sign({ id: User.id}, 'newpassword  '),
-                     success: true,
-                 message: 'user created'
-  
-               })
-                
-              } else {
-                return res.status(400).json({
-                  message: false,
-                  message: "User already exists"
-                });
-              }
-            })
-          }
-
-            });
-          
-        
+// Task 1 ends here
 
 
 
-// app.post('/signup', (req, res, next) =>{
-//   let user = new User();
+app.use(passport.initialize())
+app.use(passport.session())
 
-//   user.email=req.body.email;
-//   user.password = req.body.password;
+setupPassport(app)
 
-//   User.findOne({ email: req.body.email}, (err, existingUser) => {
-//     if(existingUser) {
-//       console.log(req.body.email + " is already existing ")
-//       //return res.redirect('/signup');
-//     }else {
-//     user.save(function(err, user) {
-//       if(err) return next(err);
-//        res.status(200).json({success:true, message: 'user is registered'});
-//           res.status(200).json({ token: jwt.sign({ id: User.id}, 'newpassword  '),
-//           success: true,
-//          message: 'user created'
-  
-//    })
-//       res.json('Successfully created a new user')
-//     })
-//   }
+app.get('/', (req, res) => {
+  console.log('Yay')
+  res.json('welcome to authenticating jwt')
+});
+
+app.post('/signup', signUpController)
+
+app.post('/login', passport.authenticate('local'), function (req, res)  {
+  if (req.user) {
+    return res.status(200).json({
+      message: 'Successful login',
+      success: 'true',
+      user: req.user
+    })
+  }
+  return res.status(401).json({
+    message: 'Unauthorized Access',
+    success: false
+  })
+})
+
+// app.get('/profile', passport.authenticate('local', {
+//   session: false
+// }), (req, res) => {
+//   res.json({
+//     user: user.req
+//   });
+// });
+// app.get('/logout', (req, res) => {
+//   req.logout();
+//   res.redirect('/');
 // })
 
-//})
+module.exports = app
 
 
+    
 
 
-
-  app.post("/login", (req, res, next) => {
-    passport.authenticate("local", (err, user, info) => {
-      if (err) {
-        return res.status(400).json({
-          message: "Error logging in"
-        });
-      } else if (!user) {
-        return res.status(400).json({
-          message: "Incorrect Email or Password"
-        });
-      }
-      req.login(user, err => {
-        if (err) {
-          return res.send(err);
-        }
-        return res.json({ token: jwt.sign({ id: User.id }, 'newpassword'),
-          success: true,
-               user: {
-                id: user._id,
-                email: user.email,
-               }
-        });
-      });
-    })(req, res);
-  });
 
   
-  // app.post("/login", (req, res, next) => {
-  //   passport.authenticate("local", (err, user, info) => {
-  //     if (err) {
-  //       return res.status(400).json({
-  //         message: "Error logging in"
-  //       });
-  //     } else if (!user) {
-  //       return res.status(404).json({
-  //         message: "Incorrect Email or Password"
-  //       });
-  //     }
-  //     req.login(User, err => {
-  //       if (err) {
-  //         return res.send(err);
-  //       }
-  //       return res.status(200).json({ token: jwt.sign({ id: User.id }, 'newpassword'),
-  //         success: true,
-  //              user: {
-  //               id: User._id,
-  //               email: User.email,
-  //              }
-  //       });
-  //     });
-  //   })(req, res);
-  // });
-
-  // app.use((req, res, next) => {
-  //   if (req.tokenPayload) {
-  //     req.user = req.tokenPayload.id;
-  //   }
-  //   if (req.User) {
-  //     return next();
-  //   } else {
-  //     return res.status(401).json({ status: 'error', code: 'unauthorized' });
-  //   }
-  // });
-
-
  
-
-  // app.get('/logout', (req, res) => {
-  //   req.logout();
-  //   res.redirect('/');
-  // })
-}
