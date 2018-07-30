@@ -1,13 +1,9 @@
-
-
-
 const Router = require('express').Router
 const passport = require('passport');
 const User = require('../model/User');
-const signUpController = require('../controllers/signupController')
+const signupController = require('../controllers/signupController')
 const cfg = require('../controllers/config')
 const setupPassport = require('../config/passport')
-
 
 const app = Router()
   // Task1 begins here
@@ -16,7 +12,7 @@ const app = Router()
     if(req) {
    return res.status(200).json({ status: 'success'});
     }
-    return res.status(404).json({ status: 'unsuccessful'})
+    return res.status(404)
   });
   
   let data = []
@@ -31,9 +27,6 @@ const app = Router()
    res.status(200).json({data:data});
   })
 // Task 1 ends here
-
-
-
 app.use(passport.initialize())
 app.use(passport.session())
 
@@ -44,7 +37,7 @@ app.get('/', (req, res) => {
   res.json('welcome to authenticating jwt')
 });
 
-app.post('/signup', signUpController)
+app.post('/signup', signupController)
 
 app.post('/login', passport.authenticate('local'), function (req, res)  {
   if (req.user) {
@@ -58,8 +51,6 @@ app.post('/login', passport.authenticate('local'), function (req, res)  {
     message: 'Unauthorized Access',
   })
 })
-
-
 
 module.exports = app
 
