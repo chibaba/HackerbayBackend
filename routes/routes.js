@@ -28,6 +28,7 @@ const app = Router()
   })
 // Task 1 ends here
 app.use(passport.initialize())
+
 app.use(passport.session())
 
 setupPassport(app)
