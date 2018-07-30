@@ -75,6 +75,8 @@ describe('Login/SignUp Routes', () => {
         .send(params)
         .end((err, res) => {
           res.should.have.status(401);
+          res.should.have.property('message');
+          res.should.have.property('success');
           done();
         });
     });
