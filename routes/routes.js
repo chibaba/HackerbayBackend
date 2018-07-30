@@ -43,9 +43,10 @@ app.post('/login', passport.authenticate('local'), function (req, res)  {
       user: req.user
     })
   }
-  return res.status(401).json({
-    message: 'Unauthorized Access',
-  })
+  return res.status(401)
+  // .json({
+  //   message: 'Unauthorized Access',
+  // })
 })
 
 module.exports = app
