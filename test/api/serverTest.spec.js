@@ -20,10 +20,20 @@ describe('API Routes', () => {
           done();
         });
     });
+    it('should return a 404 response', done => {
+      chai
+        .request('http://localhost:5000')
+        .get('/not home')
+        .end((err, res) => {
+          res.should.have.status(404);
+          res.body.should.be.a('object');
+          done();
+        });
+    });
   });
 
   describe('GET /data', () => {
-    it('should return a response of 200', done => {
+    it('should return a response of 404', done => {
       chai
         .request('http://localhost:5000')
         .get('/data')

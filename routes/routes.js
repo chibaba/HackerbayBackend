@@ -13,7 +13,10 @@ const app = Router()
   // Task1 begins here
 
   app.get('/', (req, res) => {
-    res.status(200).json({ status: 'success'});
+    if(req) {
+   return res.status(200).json({ status: 'success'});
+    }
+    return res.status(404).json({ status: 'unsuccessful'})
   });
   
   let data = []
@@ -56,17 +59,7 @@ app.post('/login', passport.authenticate('local'), function (req, res)  {
   })
 })
 
-// app.get('/profile', passport.authenticate('local', {
-//   session: false
-// }), (req, res) => {
-//   res.json({
-//     user: user.req
-//   });
-// });
-// app.get('/logout', (req, res) => {
-//   req.logout();
-//   res.redirect('/');
-// })
+
 
 module.exports = app
 
