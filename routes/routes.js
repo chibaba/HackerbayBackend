@@ -53,7 +53,6 @@ app.post('/login', passport.authenticate('local'), function (req, res)  {
   }
   return res.status(401).json({
     message: 'Unauthorized Access',
-    success: false
   })
 })
 

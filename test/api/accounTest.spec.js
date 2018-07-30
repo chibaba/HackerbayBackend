@@ -61,10 +61,11 @@ describe('Login/SignUp Routes', () => {
           res.body.should.be.a('object');
           res.body.should.have.property('message');
           res.body.should.have.property('success')
+          res.body.should.have.property('user')
           done();
         });
     });
-    it('it should return 401 when User is not registered in db ', done => {
+    it('it should return 401 when User is not signedup in db ', done => {
       const params = {
         email: 'chinedua@gmail.com',
         password: '12345',
@@ -75,8 +76,20 @@ describe('Login/SignUp Routes', () => {
         .send(params)
         .end((err, res) => {
           res.should.have.status(401);
-          res.should.have.property('message');
-          res.should.have.property('success');
+          done();
+        });
+    });
+    it('it should return 400 when User dosent have password ', done => {
+      const params = {
+        email: 'chiscript@gmail.com',
+        password: ''
+      };
+      chai
+        .request('http://localhost:5000')
+        .post('/login')
+        .send(params)
+        .end((err, res) => {
+          res.should.have.status(400);
           done();
         });
     });
