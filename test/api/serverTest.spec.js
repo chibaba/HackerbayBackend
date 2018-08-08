@@ -33,7 +33,7 @@ describe('API Routes', () => {
   });
 
   describe('GET /data', () => {
-    it('should return a response of 404', done => {
+    it('should return a response of 200', done => {
       chai
         .request('http://localhost:5000')
         .get('/data')

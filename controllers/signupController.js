@@ -14,7 +14,7 @@ module.exports = function(req, res) {
     salt: salt,
     password
   }
-  User.sync({force: true}).then(function() {
+  User.sync({force: false}).then(function() {
     User.create(newUser).then(function(user) {
       console.log(user)
       res.status(200).json({
