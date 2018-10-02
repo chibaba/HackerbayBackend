@@ -2,8 +2,8 @@ const Router = require('express').Router
 const passport = require('passport');
 const User = require('../model/User');
 const signupController = require('../controllers/signupController')
-const cfg = require('../controllers/config')
-const setupPassport = require('../config/passport')
+//const cfg = require('../controllers/config')
+//const setupPassport = require('../config/passport')
 
 const app = Router()
   // Task1 begins here
