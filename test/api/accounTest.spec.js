@@ -11,8 +11,8 @@ chai.use(chaiHttp);
 describe('POST /signup', () => {
   it('it should able to register new account', done => {
     const params = {
-      email: 'chiscript@gmail.com',
-      password: 'they are here',
+      email: 'chinedut@gmail.com',
+      password: 'theyhere',
     };
     chai
       .request('http://localhost:5000')
@@ -27,7 +27,7 @@ describe('POST /signup', () => {
         done();
       });
   });
-  it('it should return 400 when User is already registered in db ', done => {
+  it('it should return 404 when User is already registered in db ', done => {
     const params = {
       email: 'chiscript@gmail.com',
       password: 'they are here',
@@ -37,7 +37,7 @@ describe('POST /signup', () => {
       .post('/signup')
       .send(params)
       .end((err, res) => {
-        res.should.have.status(400);
+        res.should.have.status(404);
         done();
       });
   });
