@@ -29,8 +29,8 @@ describe('POST /signup', () => {
   });
   it('it should return 404 when User is already registered in db ', done => {
     const params = {
-      email: 'chiscript@gmail.com',
-      password: 'they are here',
+      email: 'chinedut@gmail.com',
+      password: 'theyhere',
     };
     chai
       .request('http://localhost:5000')
