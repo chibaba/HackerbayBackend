@@ -50,8 +50,8 @@ describe('Login/SignUp Routes', () => {
   describe('POST /login', () => {
     it('it should POST a login ', done => {
       const params = {
-        email: 'chiscript@gmail.com',
-        password: 'they are here',
+        email: 'chinedut@gmail.com',
+        password: 'theyhere',
       };
       chai
         .request('http://localhost:5000')
