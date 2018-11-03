@@ -2,7 +2,9 @@ const Router = require('express').Router
 const passport = require('passport');
 const User = require('../model/User');
 const signupController = require('../controllers/signupController')
-//const cfg = require('../controllers/config')
+
+import * as websiteController from './controllers/website';
+
 //const setupPassport = require('../config/passport')
 
 const app = Router()
@@ -48,5 +50,7 @@ app.post('/login', passport.authenticate('local'), function (req, res)  {
   })
 }
 })
+
+const websiteRoute = api('/website', websiteController, { middleware: [authMiddleware] });
 
 module.exports = app

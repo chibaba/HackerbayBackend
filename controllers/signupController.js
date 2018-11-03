@@ -1,7 +1,7 @@
 
 
 var bcrypt = require('bcrypt'),
-    User = require('../model/User')
+    User = require('../db/models/user')
 
 module.exports = function(req, res) {
   var email = req.body.email
