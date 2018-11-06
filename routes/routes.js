@@ -51,6 +51,6 @@ app.post('/login', passport.authenticate('local'), function (req, res)  {
 }
 })
 
-const websiteRoute = api('/website', websiteController, { middleware: [authMiddleware] });
+//const websiteRoute = api('/website', websiteController, { middleware: [authMiddleware] });
 
 module.exports = app
